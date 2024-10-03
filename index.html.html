@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú del Restaurante</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-image: url('cafete.jpg'); 
+            background-size: cover; 
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-attachment: fixed; /* Fija la imagen de fondo */
+            color: black; 
+            position: relative; 
+        }
+
+        .menu-title { 
+            font-weight: bold; 
+            font-size: 2em; 
+            text-align: center; 
+            margin-bottom: 40px; 
+        }
+        .section-title { 
+            font-weight: bold; 
+            font-size: 1.5em; 
+            margin-top: 20px; 
+        }
+        .menu-item { 
+            margin: 10px 0; 
+        }
+        button { 
+            padding: 10px 10px; 
+            background-color: rgba(199, 145, 65, 0.7); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            font-size: 1.1em; 
+            border-radius: 10px; 
+        }
+        #totalPrecio { 
+            font-weight: bold; 
+            font-size: 1.2em; 
+            position: fixed; 
+            top: 140px; 
+            right: 20px; 
+            z-index: 100; 
+        }
+        .mesa-container {
+            position: fixed; 
+            right: 20px; 
+            top: 160px; /* Ajustado para estar justo debajo del total */
+            text-align: center; 
+        }
+        .mesa-label {
+            font-weight: bold; 
+            display: block; 
+            font-size: 1.2em; 
+        }
+        #mesa {
+            width: auto; 
+            height: 2em; 
+            text-align: center; 
+            font-size: 1.2em; 
+            margin-bottom: 10px; 
+            border-radius: 10px; 
+        }
+        #qrPago { 
+            display: none; 
+            width: 100%; 
+            height: 100vh; 
+            background-color: white; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            z-index: 1000; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        #qrPago img { 
+            max-width: 80%; 
+            max-height: 80%; 
+        }
+        .pedido-container {
+            position: fixed; 
+            right: 20px; 
+            bottom: 20px; 
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+    <!-- Aquí va el resto de tu contenido -->
+</body>
+    <h1 class="menu-title">Menú Allqay</h1>
+    
+    <div id="totalPrecio">Total: S/0.00</div>
+
+    <div class="mesa-container">
+        <div>
+            <label class="mesa-label" for="mesa">N° Mesa:</label>
+            <input type="number" id="mesa" min="1" max="5" style="margin-bottom: 10px;"> 
+        </div>
+    </div>
+
+    <div id="menu">
+        <div class="section-title">Cafés:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item1" name="menu" value="Espresso" data-price="5.00" onclick="actualizarTotal()">
+            <label for="item1">Espresso - S/5.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item2" name="menu" value="Americano" data-price="6.00" onclick="actualizarTotal()">
+            <label for="item2">Americano - S/6.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item3" name="menu" value="Capuchino" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item3">Capuchino - S/7.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item4" name="menu" value="Mocaacino" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item4">Mocaacino - S/7.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item5" name="menu" value="Macchiato" data-price="5.00" onclick="actualizarTotal()">
+            <label for="item5">Macchiato - S/5.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item6" name="menu" value="Flat White" data-price="6.00" onclick="actualizarTotal()">
+            <label for="item6">Flat White - S/6.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item7" name="menu" value="Ice Coffee" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item7">Ice Coffee - S/7.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item8" name="menu" value="Affogato" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item8">Affogato - S/8.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item9" name="menu" value="Ristretto" data-price="5.00" onclick="actualizarTotal()">
+            <label for="item9">Ristretto - S/5.00</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item10" name="menu" value="Bonbon Latte" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item10">Bonbon Latte - S/7.00</label>
+        </div>
+
+        <div class="section-title">Infusiones:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item11" name="menu" value="Te" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item11">Te - S/4.00 Taza</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item12" name="menu" value="Boldo" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item12">Boldo - S/4.00 Taza</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item13" name="menu" value="Manzanilla" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item13">Manzanilla - S/4.00 Taza</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item14" name="menu" value="Hierbaluisa" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item14">Hierbaluisa - S/4.00 Taza</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item15" name="menu" value="Mate de coca" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item15">Mate de coca - S/4.00 Taza</label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item16" name="menu" value="Emoliente" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item16">Emoliente - S/4.00 Taza</label>
+        </div>
+        <div class="section-title">Milkshake:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item17" name="menu" value="Clasico" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item17">Clasico - S/11.00 </label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item18" name="menu" value="Chocolate" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item17">Chocolate - S/11.00 </label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item19" name="menu" value="Fresa" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item19">Fresa - S/11.00 </label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item20" name="menu" value="Durazno" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item20">Durazno - S/11.00 </label>
+        </div>
+        <div class="section-title">Frappes:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item21" name="menu" value="Allqay" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item21">Allqay - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item22" name="menu" value="Chocolate" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item22">Chocolate - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item23" name="menu" value="Bee" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item23">Bee - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item24" name="menu" value="Algarrobina" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item24">Algarrobina - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item25" name="menu" value="Caramelo" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item25">Caramelo - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item26" name="menu" value="Oreo" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item26">Oreo - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item27" name="menu" value="Crema de coco y ron " data-price="10.00" onclick="actualizarTotal()">
+            <label for="item27">Especial - crema de coco y ron - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item28" name="menu" value="Lucuma" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item28">Lucuma - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item29" name="menu" value="Maracuya" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item29">Maracuya - S/10.00 </label>
+        </div>
+        <div class="section-title">Jugos:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item30" name="menu" value="Fresa" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item30">Fresa - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item31" name="menu" value="Piña" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item31">Piña - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item31" name="menu" value="Surtido" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item31">Surtido - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item32" name="menu" value="Platano" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item32">Platano - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item33" name="menu" value="Papaya" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item33">Papaya - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item34" name="menu" value="Especial Allqay" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item34">Especial Allqay - S/8.00 </label>
+        </div>
+        <div class="section-title">Ensaladas de Frutas:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item35" name="menu" value="Ensalada Allqay" data-price="12.00" onclick="actualizarTotal()">
+            <label for="item35">Ensalada Allqay - S/12.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item36" name="menu" value="Especial" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item36">Especial - S/15.00 </label>
+        </div>
+        <div class="section-title">Sandwich:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item37" name="menu" value="Doble" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item37">Doble - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item38" name="menu" value="Triple" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item38">Triple - S/11.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item39" name="menu" value="Croissant doble" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item39">Croissant doble - S/8.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item40" name="menu" value="Croissant de pollo" data-price="11.00" onclick="actualizarTotal()">
+            <label for="item40">Croissant de pollo - S/11.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item41" name="menu" value="Sandwich especial pollo a la plancha" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item41">Sandwich especial -pollo a la plancha - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item42" name="menu" value="Hamburguesa" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item42">Hamburguesa - S/13.00 </label>
+        </div>
+        <div class="section-title">Empanadas:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item43" name="menu" value="Queso" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item43">Queso - S/7.00 </label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item44" name="menu" value="Carne" data-price="8.00" onclick="actualizarTotal()">
+            <label for="item44">Carne - S/8.00 </label>
+        </div>
+        <div class="section-title">Dulces:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item45" name="menu" value="Torta de chocolate" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item45">Torta de chocolate - S/7.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item46" name="menu" value="Torta de tres leches" data-price="6.00" onclick="actualizarTotal()">
+            <label for="item46">Torta de tres leches - S/6.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item47" name="menu" value="Queque de Piña" data-price="6.00" onclick="actualizarTotal()">
+            <label for="item47">Queque de Piña - S/6.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item48" name="menu" value="Tartaleta de Maracuya" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item48">Tartaleta de Maracuya - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item49" name="menu" value="Tartaleta de Fresa" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item49">Tartaleta de Fresa - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item50" name="menu" value="Pie de Limon" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item50">Pie de Limon - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item51" name="menu" value="Pie de Maracuya" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item51">Pie de Maracuya - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item46" name="menu" value="Pie de Manzana" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item46">Pie de Manzana - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item47" name="menu" value="Pionono" data-price="3.50" onclick="actualizarTotal()">
+            <label for="item47">Pionono - S/3.50 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item48" name="menu" value="Alfajor" data-price="3.00" onclick="actualizarTotal()">
+            <label for="item48">Alfajor - S/3.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item49" name="menu" value="Copa de helado-3bolas" data-price="10.00" onclick="actualizarTotal()">
+            <label for="item49">Copa de helado-3bolas - S/10.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item50" name="menu" value="Fresa con crema" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item50">Fresa con crema - S/7.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item51" name="menu" value="Chocotejas" data-price="2.50" onclick="actualizarTotal()">
+            <label for="item51">Chocotejas - S/2.50 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item52" name="menu" value="Trufas" data-price="3.00" onclick="actualizarTotal()">
+            <label for="item52">Trufas - S/3.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item53" name="menu" value="Torta de galletas" data-price="5.00" onclick="actualizarTotal()">
+            <label for="item53">Torta de galletas - S/5.00 </label>
+        </div>
+        <div class="section-title">Bebidas y refrescos:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item54" name="menu" value="Maracuya-vaso" data-price="3.00" onclick="actualizarTotal()">
+            <label for="item54">Maracuya-vaso - S/3.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item55" name="menu" value="Limonada-vaso" data-price="3.00" onclick="actualizarTotal()">
+            <label for="item55">Limonada-vaso - S/3.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item56" name="menu" value="Gaseosa 500ml" data-price="4.00" onclick="actualizarTotal()">
+            <label for="item56">Gaseosa 500ml - S/4.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item57" name="menu" value="Agua mineral" data-price="2.50" onclick="actualizarTotal()">
+            <label for="item57">Agua mineral - S/2.50 </label>
+        </div>
+        <div class="section-title">Cocteles:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item58" name="menu" value="Pisco sour" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item58">Pisco sour - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item59" name="menu" value="Chilcano clasico" data-price="12.00" onclick="actualizarTotal()">
+            <label for="item59">Chilcano clasico - S/12.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item60" name="menu" value="Chilcano de maracuya" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item60">Chilcano de maracuya - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item61" name="menu" value="Algarrobina de pisco" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item61">Algarrobina de pisco - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item62" name="menu" value="Peruanisimo" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item62">Peruanisimo - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item63" name="menu" value="Sangria tropical" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item63">Sangria tropical - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item64" name="menu" value="Machu picchu" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item64">Machu picchu - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item65" name="menu" value="Pisco sunrise" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item65">Pisco sunrise - S/13.00 </label>
+        </div>
+        <div class="section-title">Ron:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item66" name="menu" value="Mojito" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item66">Mojito - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item67" name="menu" value="Piña colada" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item67">Piña colada - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item68" name="menu" value="Bacardi" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item68">Bacardi - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item69" name="menu" value="Cuba libre" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item69">Cuba libre - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item70" name="menu" value="Daiquiri" data-price="13.00" onclick="actualizarTotal()">
+            <label for="item70">Daiquiri - S/13.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item71" name="menu" value="Blue Hawaii" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item71">Blue Hawaii - S/14.00 </label>
+        </div>
+        <div class="section-title">Internacionales:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item72" name="menu" value="Sex on the beach" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item72">Sex on the beach - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item73" name="menu" value="Singapure" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item73">Singapure - S/15.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item74" name="menu" value="Amor en llamas" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item74">Amor en llamas - S/15.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item75" name="menu" value="Long island ice tea" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item75">Long island ice tea - S/15.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item76" name="menu" value="Blue laggon" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item76">Blue laggon - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item77" name="menu" value="Gin berry" data-price="16.00" onclick="actualizarTotal()">
+            <label for="item77">Gin berry - S/16.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item78" name="menu" value="Whiskey sour" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item78">Whiskey sour - S/15.00 </label>
+        </div>
+        <div class="section-title">Tikis:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item79" name="menu" value="Mai tai" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item79">Mai tai - S/14.00 </label>
+        </div>
+        <div class="menu-item">
+            <input type="checkbox" id="item80" name="menu" value="Planter punch" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item80">Planter punch - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item81" name="menu" value="Huracan" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item81">Huracan - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item82" name="menu" value="Aku aku" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item82">Aku aku - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item83" name="menu" value="Jungle bir" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item83">Jungle bir - S/15.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item84" name="menu" value="Zombie" data-price="16.00" onclick="actualizarTotal()">
+            <label for="item84">Zombie - S/16.00 </label>
+        </div>
+        <div class="section-title">Flameados:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item85" name="menu" value="Camara de gas" data-price="16.00" onclick="actualizarTotal()">
+            <label for="item85">Camara de gas - S/16.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item86" name="menu" value="Satanas" data-price="16.00" onclick="actualizarTotal()">
+            <label for="item86">Satanas - S/16.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item87" name="menu" value="Lamborghini" data-price="16.00" onclick="actualizarTotal()">
+            <label for="item87">Lamborghini - S/16.00 </label>
+        </div>
+        <div class="section-title">Exotica:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item88" name="menu" value="Rc" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item88">Rc - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item89" name="menu" value="Beso de abeja" data-price="15.00" onclick="actualizarTotal()">
+            <label for="item89">Beso de abeja - S/15.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item90" name="menu" value="Inca huasi" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item90">Inca huasi - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item91" name="menu" value="Piraña asesina" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item91">Piraña asesina - S/14.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item92" name="menu" value="7Cueros" data-price="14.00" onclick="actualizarTotal()">
+            <label for="item92">7Cueros - S/14.00 </label>
+        </div>
+        <div class="section-title">Cervezas:</div>
+        
+        <div class="menu-item">
+            <input type="checkbox" id="item93" name="menu" value="Pilsen" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item93">Pilsen - S/7.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item94" name="menu" value="Cusqueña" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item94">Cusqueña - S/7.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item95" name="menu" value="Corona" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item95">Corona - S/7.00 </label>
+        </div>
+        <div class="menu-item"></div>
+            <input type="checkbox" id="item96" name="menu" value="Artesanal" data-price="7.00" onclick="actualizarTotal()">
+            <label for="item96">Artesanal - S/7.00 </label>
+        </div>
+    </div>
+
+    <div class="pedido-container">
+        <button onclick="realizarPedido()">Realizar Pedido</button>
+    </div>
+
+    <div id="qrPago">
+        <img src="https://suministrosperu.com/wp-content/uploads/2016/01/YAPE-QR.png" alt="QR de Pago">
+    </div>
+
+    <script>
+        function actualizarTotal() {
+            let total = 0;
+            document.querySelectorAll('input[name="menu"]:checked').forEach(item => {
+                total += parseFloat(item.getAttribute('data-price'));
+            });
+            document.getElementById('totalPrecio').innerText = `Total: S/${total.toFixed(2)}`;
+        }
+
+        function realizarPedido() {
+            let itemsSeleccionados = [];
+            document.querySelectorAll('input[name="menu"]:checked').forEach(item => {
+                itemsSeleccionados.push(item.value);
+            });
+
+            if (itemsSeleccionados.length === 0) {
+                alert("Por favor, selecciona al menos un producto del menú.");
+                return;
+            }
+
+            let mesa = document.getElementById('mesa').value;
+            if (!mesa) {
+                alert("Por favor, introduce el número de mesa.");
+                return;
+            }
+
+            let total = calcularTotal(itemsSeleccionados);
+            let pedido = {
+                mesa: mesa,
+                productos: itemsSeleccionados,
+                total: `S/${total.toFixed(2)}`,
+                despachado: false,
+                mostrarQR: false
+            };
+
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            pedidos.push(pedido);
+            localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+            alert(`Pedido realizado correctamente. Total: S/${total.toFixed(2)}`);
+        }
+
+        function calcularTotal(productos) {
+            let precios = {
+                'Espresso': 5.00,
+                'Americano': 6.00,
+                'Capuchino': 7.00,
+                'Mocaacino': 7.00,
+                'Macchiato': 5.00,
+                'Flat White': 6.00,
+                'Ice Coffee': 7.00,
+                'Affogato': 8.00,
+                'Ristretto': 5.00,
+                'Bonbon Latte': 7.00,
+                'Te': 4.00,
+                'Boldo': 4.00,
+                'Manzanilla': 4.00,
+                'Hierbaluisa': 4.00,
+                'Mate de coca': 4.00,
+                'Emoliente': 4.00,
+                'Clasico': 11.00,
+                'Chocolate': 11.00,
+                'Fresa': 11.00,
+                'Durazno': 11.00,
+                'Clasico': 11.00,
+                'Allqay': 10.00,
+                'Chocolate': 10.00,
+                 'Bee': 10.00,
+                'Algarrobina': 10.00,
+                'Caramelo': 10.00,
+                'Oreo': 10.00,
+                'Especial(crema de coco y ron)': 10.00,
+                'Lucuma' : 10.00,
+                'Maracuya' : 10.00,
+'Fresa' : 8.00,
+'Piña': 8.00,
+'Surtido': 8.00,
+'Plantano': 8.00,
+'Papaya': 8.00,
+'Especial Allqay': 8.00,
+'Ensalada Allqay': 12.00,
+'Especial': 15.00,
+'Doble': 8.00,
+'Triple': 11.00,
+'Croissant doble': 8.00,
+'Croissant de pollo': 11.00,
+'Sandwich especial(pollo a la plancha)': 13.00,
+'Hamburguesa clasica': 13.00,
+'Queso': 7.00,
+'Carne': 8.00,
+'Torta de Chocolate': 7.00,
+'Torta de tres leches': 6.00,
+'Queque de piña': 6.00,
+'Tartaleta de Maracuya': 4.00,
+'Tartaleta de fresa': 4.00,
+'Pie de limon': 4.00,
+'Pie de maracuya': 4.00,
+'Pie de Manzana': 4.00,
+'Pionono': 3.50,
+'Alfajor': 3.00,
+'Copa de helado(3 bolas)': 10.00,
+'Fresas con crema': 7.00,
+'Chocotejas': 2.50,
+'Trufas': 3.00,
+'Torta de galletas': 5.00,
+'Maracuya(vaso)': 3.00,
+'Limonada(vaso)': 3.00,
+'Gaseosa 500ml': 4.00,
+'Agua mineral': 2.50,
+'Pisco sour': 14.00,
+'Chilcano clasico': 12.00,
+'Chilcano de maracuya': 13.00,
+'Algarrobina de pisco': 14.00,
+'Peruanisimo': 14.00,
+'Sangria tropical': 14.00,
+'Machi Picchu': 13.00,
+'Pisco sunrise': 13.00,
+'Mojito': 13.00,
+'Piña colada': 14.00,
+'Bacardi': 14.00,
+'Cuba libre': 13.00,
+'Daiquiri': 13.00,
+'Blue Hawaii': 14.00,
+'Sex on the beach': 14.00,
+'Singapure': 15.00,
+'Amor en llamas': 15.00,
+'Long island ice tea': 15.00,
+'Blue laggon': 14.00,
+'Gin berry': 16.00,
+'Whiskey sour': 15.00,
+'Mai tai': 14.00,
+'Planter punch': 15.00,
+'Huracan': 14.00,
+'Aku aku': 14.00,
+'jungle bir': 15.00,
+'Zombie': 16.00,
+'Camara de gas': 16.00,
+'Satanas': 16.00,
+'Lamborghini': 16.00,
+'Rc': 14.00,
+'Beso de abeja': 15.00,
+'Inca huasi': 14.00,
+'Piraña asesina': 14.00,
+'7 Cueros' : 14.00,
+'Pilsen' : 7.00,
+'Cusqueña' : 7.00,
+'Corona' : 7.00,
+'Artesanal' : 7.00,
+                
+            };
+            return productos.reduce((total, producto) => total + precios[producto], 0);
+        }
+
+        function verificarQR() {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            let mesa = document.getElementById('mesa').value;
+
+            let pedidoActual = pedidos.find(p => p.mesa === mesa);
+            if (pedidoActual && pedidoActual.mostrarQR) {
+                document.getElementById('qrPago').style.display = 'flex';
+                document.getElementById('menu').style.display = 'none';
+            } else {
+                document.getElementById('qrPago').style.display = 'none';
+                document.getElementById('menu').style.display = 'block';
+            }
+        }
+
+        setInterval(verificarQR, 1000);
+
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'pedidos') {
+                verificarQR();
+            }
+        });
+    </script>
+</body>
+</html>
