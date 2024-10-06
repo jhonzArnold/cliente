@@ -145,44 +145,41 @@
             let pedido = {
                 mesa: mesa,
                 productos: itemsSeleccionados,
-                total: total.toFixed(2),
+                total: `S/${total.toFixed(2)}`,
                 despachado: false
             };
 
-            // Aquí enviamos el pedido a la hoja de Google Sheets
+            // Aquí enviamos el pedido a la página de administración
             enviarPedido(pedido);
         }
 
-        // Función para calcular el total del pedido
-        function calcularTotal(items) {
-            let total = 0;
-            items.forEach(item => {
-                let precio = parseFloat(document.querySelector(`input[value="${item}"]`).getAttribute('data-price'));
-                total += precio;
-            });
-            return total;
-        }
-
-        // Función para enviar el pedido a Google Sheets a través de Apps Script
+        // Función para enviar el pedido a la URL de administración
         function enviarPedido(pedido) {
-            fetch('https://script.google.com/macros/s/AKfycbxiW3FIzqYvdc1agPa73HVYUPMcLsWSZXajZTBllec/dev', {
+            const url = 'https://mi-servidor.com/administracion'; // Cambia esto por tu URL de administración
+
+            fetch(url, {
                 method: 'POST',
-                body: JSON.stringify(pedido),
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pedido),
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Pedido realizado con éxito.');
-                } else {
-                    alert('Error al realizar el pedido.');
-                }
+                alert("¡Pedido realizado con éxito!"); // Muestra confirmación
             })
-            .catch(error => {
-                alert('Ocurrió un error al realizar el pedido: ' + error);
+            .catch((error) => {
+                console.error('Error al realizar el pedido:', error);
             });
+        }
+
+        function calcularTotal(itemsSeleccionados) {
+            let total = 0;
+            itemsSeleccionados.forEach(item => {
+                const elemento = document.querySelector(`input[value="${item}"]`);
+                total += parseFloat(elemento.getAttribute('data-price'));
+            });
+            return total;
         }
     </script>
 </body>
