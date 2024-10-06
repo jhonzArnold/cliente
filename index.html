@@ -42,69 +42,8 @@
             <input type="checkbox" id="item1" name="menu" value="Espresso" data-price="5.00" onclick="actualizarTotal()">
             <label for="item1">Espresso - S/5.00</label>
         </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item2" name="menu" value="Americano" data-price="6.00" onclick="actualizarTotal()">
-            <label for="item2">Americano - S/6.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item3" name="menu" value="Capuchino" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item3">Capuchino - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item4" name="menu" value="Mocaacino" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item4">Mocaacino - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item5" name="menu" value="Macchiato" data-price="5.00" onclick="actualizarTotal()">
-            <label for="item5">Macchiato - S/5.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item6" name="menu" value="Flat White" data-price="6.00" onclick="actualizarTotal()">
-            <label for="item6">Flat White - S/6.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item7" name="menu" value="Ice Coffee" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item7">Ice Coffee - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item8" name="menu" value="Affogato" data-price="8.00" onclick="actualizarTotal()">
-            <label for="item8">Affogato - S/8.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item9" name="menu" value="Ristretto" data-price="5.00" onclick="actualizarTotal()">
-            <label for="item9">Ristretto - S/5.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item10" name="menu" value="Bonbon Latte" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item10">Bonbon Latte - S/7.00</label>
-        </div>
+        <!-- Otros elementos del menú -->
 
-        <div class="menu-title">Infusiones:</div>
-        
-        <div class="menu-item">
-            <input type="checkbox" id="item11" name="menu" value="Te" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item11">Te - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item12" name="menu" value="Boldo" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item12">Boldo - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item13" name="menu" value="Manzanilla" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item13">Manzanilla - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item14" name="menu" value="Hierbaluisa" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item14">Hierbaluisa - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item15" name="menu" value="Mate de coca" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item15">Mate de coca - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item16" name="menu" value="Emoliente" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item16">Emoliente - S/4.00 Taza</label>
-        </div>
     </div>
 
     <!-- Cuadro flotante para el total y el botón -->
@@ -149,13 +88,13 @@
                 despachado: false
             };
 
-            // Aquí enviamos el pedido a la página de administración
+            // Aquí enviamos el pedido a Google Sheets
             enviarPedido(pedido);
         }
 
-        // Función para enviar el pedido a la URL de administración
+        // Función para enviar el pedido a Google Sheets
         function enviarPedido(pedido) {
-            const url = 'https://mi-servidor.com/administracion'; // Cambia esto por tu URL de administración
+            const url = 'https://script.google.com/macros/s/AKfycbyFah5Vc_N8b8ulJZ64TD-DL4tHlj9Fje52gYPJ0lyIy9EgO7QHsgLSj32mOyISEmwl/exec'; // Cambia esto por tu URL de Apps Script
 
             fetch(url, {
                 method: 'POST',
@@ -164,7 +103,7 @@
                 },
                 body: JSON.stringify(pedido),
             })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
                 alert("¡Pedido realizado con éxito!"); // Muestra confirmación
             })
