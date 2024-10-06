@@ -3,185 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú del Restaurante</title>
+    <title>Formulario de Contacto</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            padding: 20px; 
-            background-image: url('cafete.jpg'); /* Agregar imagen de fondo */
-            background-size: cover; /* Cubrir todo el fondo */
-            color: black; /* Cambiar el color del texto a negro */
-            position: relative; /* Para permitir el uso de posición absoluta en elementos hijos */
-        }
-        .menu-title { font-weight: bold; font-size: 1.5em; margin-bottom: 10px; }
-        .menu-item { margin: 10px 0; }
-        button { padding: 10px 20px; background-color: green; color: white; border: none; cursor: pointer; }
-        
-        /* Estilo del cuadro flotante */
-        .floating-box {
-            position: fixed; /* Flotante respecto a la ventana */
-            bottom: 20px; /* Espacio desde el fondo */
-            right: 20px; /* Espacio desde la derecha */
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+        body {
+            font-family: Arial, sans-serif;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000; /* Asegurar que esté encima de otros elementos */
+            background-color: #f4f4f4;
         }
-
-        #totalPrecio { font-weight: bold; margin-top: 20px; }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Menú del Restaurante</h1>
-    
-    <div id="menu">
-        <div class="menu-title">Cafés:</div>
-        
-        <div class="menu-item">
-            <input type="checkbox" id="item1" name="menu" value="Espresso" data-price="5.00" onclick="actualizarTotal()">
-            <label for="item1">Espresso - S/5.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item2" name="menu" value="Americano" data-price="6.00" onclick="actualizarTotal()">
-            <label for="item2">Americano - S/6.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item3" name="menu" value="Capuchino" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item3">Capuchino - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item4" name="menu" value="Mocaacino" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item4">Mocaacino - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item5" name="menu" value="Macchiato" data-price="5.00" onclick="actualizarTotal()">
-            <label for="item5">Macchiato - S/5.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item6" name="menu" value="Flat White" data-price="6.00" onclick="actualizarTotal()">
-            <label for="item6">Flat White - S/6.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item7" name="menu" value="Ice Coffee" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item7">Ice Coffee - S/7.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item8" name="menu" value="Affogato" data-price="8.00" onclick="actualizarTotal()">
-            <label for="item8">Affogato - S/8.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item9" name="menu" value="Ristretto" data-price="5.00" onclick="actualizarTotal()">
-            <label for="item9">Ristretto - S/5.00</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item10" name="menu" value="Bonbon Latte" data-price="7.00" onclick="actualizarTotal()">
-            <label for="item10">Bonbon Latte - S/7.00</label>
-        </div>
-
-        <div class="menu-title">Infusiones:</div>
-        
-        <div class="menu-item">
-            <input type="checkbox" id="item11" name="menu" value="Te" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item11">Te - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item12" name="menu" value="Boldo" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item12">Boldo - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item13" name="menu" value="Manzanilla" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item13">Manzanilla - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item14" name="menu" value="Hierbaluisa" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item14">Hierbaluisa - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item15" name="menu" value="Mate de coca" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item15">Mate de coca - S/4.00 Taza</label>
-        </div>
-        <div class="menu-item">
-            <input type="checkbox" id="item16" name="menu" value="Emoliente" data-price="4.00" onclick="actualizarTotal()">
-            <label for="item16">Emoliente - S/4.00 Taza</label>
-        </div>
-    </div>
-
-    <!-- Cuadro flotante para el total y el botón -->
-    <div class="floating-box">
-        <p id="totalPrecio">Total: S/0.00</p>
-        <button onclick="realizarPedido()">Realizar Pedido</button>
-    </div>
+    <h1>Formulario de Contacto</h1>
+    <form id="contactForm">
+        <input type="text" id="firstName" placeholder="Tu nombre" required>
+        <input type="text" id="lastName" placeholder="Tu apellido" required>
+        <button type="submit">Enviar</button>
+    </form>
 
     <script>
-        // Función para actualizar el total dinámicamente
-        function actualizarTotal() {
-            let total = 0;
-            document.querySelectorAll('input[name="menu"]:checked').forEach(item => {
-                total += parseFloat(item.getAttribute('data-price'));
-            });
-            document.getElementById('totalPrecio').innerText = `Total: S/${total.toFixed(2)}`;
-        }
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-        // Función para realizar el pedido
-        function realizarPedido() {
-            let itemsSeleccionados = [];
-            document.querySelectorAll('input[name="menu"]:checked').forEach(item => {
-                itemsSeleccionados.push(item.value);
-            });
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
 
-            if (itemsSeleccionados.length === 0) {
-                alert("Por favor, selecciona al menos un producto del menú.");
-                return;
-            }
-
-            let mesa = prompt("Ingrese su número de mesa:");
-            if (!mesa) {
-                alert("Por favor, introduce un número de mesa.");
-                return;
-            }
-
-            let total = calcularTotal(itemsSeleccionados);
-            let pedido = {
-                mesa: mesa,
-                productos: itemsSeleccionados,
-                total: `S/${total.toFixed(2)}`,
-                despachado: false
+            const data = {
+                firstName: firstName,
+                lastName: lastName
             };
 
-            // Aquí enviamos el pedido a la página de administración
-            enviarPedido(pedido);
-        }
-
-        // Función para enviar el pedido a la URL de administración
-        function enviarPedido(pedido) {
-            const url = 'https://mi-servidor.com/administracion'; // Cambia esto por tu URL de administración
-
-            fetch(url, {
+            fetch('https://script.google.com/macros/s/AKfycbxZv-JWM_9sdwtK6UPwgA3EFNa91lauk4No750SWUTW21f1PSF00UyNy4pYWdXmwcwe/exec', {
                 method: 'POST',
+                body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(pedido),
+                    'Content-Type': 'application/json'
+                }
             })
             .then(response => response.json())
             .then(data => {
-                alert("¡Pedido realizado con éxito!"); // Muestra confirmación
+                if (data.success) {
+                    alert('Datos enviados con éxito.');
+                } else {
+                    alert('Error al enviar los datos.');
+                }
             })
-            .catch((error) => {
-                console.error('Error al realizar el pedido:', error);
+            .catch(error => {
+                alert('Ocurrió un error al enviar los datos: ' + error);
             });
-        }
-
-        function calcularTotal(itemsSeleccionados) {
-            let total = 0;
-            itemsSeleccionados.forEach(item => {
-                const elemento = document.querySelector(`input[value="${item}"]`);
-                total += parseFloat(elemento.getAttribute('data-price'));
-            });
-            return total;
-        }
+        });
     </script>
 </body>
 </html>
-
