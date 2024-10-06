@@ -149,36 +149,39 @@
                 despachado: false
             };
 
-            // Guardar el pedido en localStorage
-            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            pedidos.push(pedido);
-            localStorage.setItem('pedidos', JSON.stringify(pedidos));
-
-            alert(`Pedido realizado correctamente. Total: S/${total.toFixed(2)}`);
+            // Aquí enviamos el pedido a la página de administración
+            enviarPedido(pedido);
         }
 
-        // Función para calcular el total al realizar el pedido
-        function calcularTotal(productos) {
-            let precios = {
-                'Espresso': 5.00,
-                'Americano': 6.00,
-                'Capuchino': 7.00,
-                'Mocaacino': 7.00,
-                'Macchiato': 5.00,
-                'Flat White': 6.00,
-                'Ice Coffee': 7.00,
-                'Affogato': 8.00,
-                'Ristretto': 5.00,
-                'Bonbon Latte': 7.00,
-                'Te': 4.00,
-                'Boldo': 4.00,
-                'Manzanilla': 4.00,
-                'Hierbaluisa': 4.00,
-                'Mate de coca': 4.00,
-                'Emoliente': 4.00
-            };
-            return productos.reduce((total, producto) => total + precios[producto], 0);
+        // Función para enviar el pedido a la URL de administración
+        function enviarPedido(pedido) {
+            const url = 'https://mi-servidor.com/administracion'; // Cambia esto por tu URL de administración
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pedido),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("¡Pedido realizado con éxito!"); // Muestra confirmación
+            })
+            .catch((error) => {
+                console.error('Error al realizar el pedido:', error);
+            });
+        }
+
+        function calcularTotal(itemsSeleccionados) {
+            let total = 0;
+            itemsSeleccionados.forEach(item => {
+                const elemento = document.querySelector(`input[value="${item}"]`);
+                total += parseFloat(elemento.getAttribute('data-price'));
+            });
+            return total;
         }
     </script>
 </body>
 </html>
+
